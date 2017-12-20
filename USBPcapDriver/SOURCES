@@ -1,0 +1,35 @@
+TARGETNAME = USBPcap
+
+TARGETTYPE = DRIVER
+
+DRIVERTYPE = WDM
+
+INF_NAME=USBPcap
+USBPCAP_VERSION=1.2.0.2
+NTTARGETFILE2=$(OBJ_PATH)\$(O)\$(INF_NAME).inf
+
+TARGETLIBS = $(DDK_LIB_PATH)\Wdm.lib \
+             $(DDK_LIB_PATH)\Wdmsec.lib \
+             $(DDK_LIB_PATH)\Ntstrsafe.lib \
+             $(DDK_LIB_PATH)\Ntoskrnl.lib \
+             $(DDK_LIB_PATH)\USBd.lib
+
+C_DEFINES=$(C_DEFINES) -DPOOL_NX_OPTIN=1
+
+INCLUDES = $(DDK_INC_PATH); \
+           $(WDM_INC_PATH);
+
+SOURCES = USBPcap.rc               \
+          USBPcapBuffer.c          \
+          USBPcapDeviceControl.c   \
+          USBPcapFilterManager.c   \
+          USBPcapGenReq.c          \
+          USBPcapHelperFunctions.c \
+          USBPcapMain.c            \
+          USBPcapPnP.c             \
+          USBPcapPower.c           \
+          USBPcapRootHubControl.c  \
+          USBPcapQueue.c           \
+          USBPcapTables.c          \
+          USBPcapURB.c
+
